@@ -2,15 +2,15 @@ import json
 import os
 import subprocess
 
-cmd = """git branch --list """
+localCmd = "git branch --list"
+remoteCmd = "git ls-remote --heads origin"
 RELEASESUB = "release/"
 MASTERSUB = "master"
 
-s = subprocess.Popen(["git branch --list"], shell=True, stdout=subprocess.PIPE).stdout
+s = subprocess.Popen([localCmd], shell=True, stdout=subprocess.PIPE).stdout
 service_state = s.read().splitlines()
-print("Found local")
 
-res = subprocess.Popen(["git ls-remote --heads origin"], shell=True, stdout=subprocess.PIPE).stdout
+res = subprocess.Popen([remoteCmd], shell=True, stdout=subprocess.PIPE).stdout
 gitRes = res.read().splitlines()
 print("Fount Remote")
 
